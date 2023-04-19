@@ -17,7 +17,7 @@ exports.post = async (req, res) => {
             postimage: req.file.filename,
         })
         await savepost.save();
-        res.redirect('/');
+        res.redirect('/home');
     } catch (error) {
         console.log('Err on post post route', error)
     }

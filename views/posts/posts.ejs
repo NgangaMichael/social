@@ -26,7 +26,14 @@
                 </form>
             </div>
             <div class="container containerborder">
-                
+                <% if(posts) { %>
+                    <% for(post of posts) { %>
+                        <img class="img-fluid" src="/postsImages/<%= post.postimage %>" alt="">
+                        <p><%= post.post %></p>
+                    <% } %>
+                <% } else { %>
+                    <p>Zero posts add a Post</p>
+                <% } %>
             </div>
         </div>
 
