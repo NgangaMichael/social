@@ -12,7 +12,7 @@
   <body>
 
     <div class="container mt-4 w-50">
-      <form class="form-group mt-2" action="/signin" method="POST">
+      <form class="form-group mt-2" action="/login" method="POST">
         <input class="form-control mt-2" required name="email" placeholder="email" type="email">
         <input class="form-control mt-2" required name="password" placeholder="password" type="password">
         <button class="btn btn-success btn-sm mt-2">Login</button>
@@ -26,14 +26,14 @@
             </button>
           </h2>
           <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-            <form class="form-group mt-2" action="/register" method="POST">
+            <form class="form-group mt-2" action="/adduser" method="POST">
                 <input class="form-control mt-2" required name="name" placeholder="name" type="name">
                 <input class="form-control mt-2" required name="email" placeholder="email" type="email">
                 <input class="form-control mt-2" required name="age" placeholder="age" type="number">
                 <input class="form-control mt-2" required name="gender" placeholder="gender" type="text">
                 <input class="form-control mt-2" required name="country" placeholder="country" type="text">
                 <input class="form-control mt-2" required name="password" placeholder="password" type="password">
-                <input class="form-control mt-2" required name="cpassword" placeholder="Confirm password" type="password">
+                <!-- <input class="form-control mt-2" required name="cpassword" placeholder="Confirm password" type="password"> -->
                 <button class="btn btn-success btn-sm mt-2">Register</button>
             </form>
         </div>
