@@ -1,3 +1,26 @@
+.profile-pic {
+    box-shadow: 1px 3px 5px rgba(37, 37, 37, 0.1);
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+}
+.post-pic {
+    box-shadow: 1px 3px 5px rgba(37, 37, 37, 0.1);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+.statusProfile {
+    box-shadow: 1px 3px 5px rgba(37, 37, 37, 0.1);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
 .containerborder {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    box-shadow: 1px 3px 5px rgba(37, 37, 37, 0.1);
+}
+.containerbordernavbar {
     box-shadow: 1px 3px 5px rgba(37, 37, 37, 0.1);
 }
