@@ -2,7 +2,7 @@ const Post = require('../models/postsmodel');
 
 exports.home = async (req, res) => {
     try {
-        const posts = await Post.find();
+        const posts = await Post.find().sort({ createdAt: -1 });
         res.render('posts/posts', {posts});
     } catch (error) {
         console.log('Err on all posts route', error)

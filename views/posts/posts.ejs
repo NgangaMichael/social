@@ -28,8 +28,56 @@
             <div class="container containerborder">
                 <% if(posts) { %>
                     <% for(post of posts) { %>
+                        <!-- Add a container to hold the text -->
+                        <div id="postTextContainer">
+                            <p><%= post.post %></p>
+                        </div>
+                        
+                        <!-- Add a button to show/hide the text -->
+                        <p id="seeMoreBtn" onclick="toggleText()" style="display:none; color: grey; cursor: pointer;">See More</p>
+                        
+                        <script>
+                        function toggleText() {
+                            var textContainer = document.getElementById("postTextContainer");
+                            var p = document.getElementById("seeMoreBtn");
+                        
+                            if (textContainer.classList.contains("show")) {
+                            textContainer.classList.remove("show");
+                            p.innerHTML = "...See More";
+                            } else {
+                            textContainer.classList.add("show");
+                            p.innerHTML = "...See Less";
+                            }
+                        }
+                        
+                        // Count the number of words in the text
+                        var text = document.getElementById("postTextContainer").textContent.trim();
+                        var wordCount = text.split(" ").length;
+                        
+                        // Show the "See More" button if the word count exceeds 20
+                        if (wordCount > 20) {
+                            var button = document.getElementById("seeMoreBtn");
+                            button.style.display = "block";
+                        }
+                        </script>
+                        
+                        <style>
+                        #postTextContainer {
+                            overflow: hidden;
+                            height: 4.5rem;
+                        }
+                        
+                        #postTextContainer.show {
+                            height: auto;
+                        }
+                        
+                        #seeMoreBtn {
+                            display: block;
+                            margin-top: 10px;
+                        }
+                        </style>
+  
                         <img class="img-fluid" src="/postsImages/<%= post.postimage %>" alt="">
-                        <p><%= post.post %></p>
                     <% } %>
                 <% } else { %>
                     <p>Zero posts add a Post</p>
