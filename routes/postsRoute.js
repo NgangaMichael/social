@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const {authUser} = require('../middleware/auth');
 const postCTRL = require('../controllers/postsControl');
 const multer = require('multer');
 const path = require('path');
@@ -16,7 +17,7 @@ const upload = multer({
     limits: {fieldSize: 1040 * 1040 * 3}
 }).single('postimage');
 
-router.get('/home', postCTRL.home);
-router.post('/post', upload, postCTRL.post);
+router.get('/home', authUser, postCTRL.home);
+router.post('/post', authUser, upload, postCTRL.post);
 
 module.exports = router;

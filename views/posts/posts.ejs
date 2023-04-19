@@ -7,7 +7,11 @@
         <!-- left panel  -->
         <div class="col-md-3">
             <div class="container containerborder">
-                <h1>Testing</h1>
+                <% if (user) { %>
+                    <p>Welcome <%= user.name %>!</p>
+                  <% } else { %>
+                    <p>Welcome guest!</p>
+                <% } %>
             </div>
         </div>
 

@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 const expiry = 60 * 60 * 1;
 const secret = 'mancity';
 
-const createToken = ({id}) => {
-    return jwt.sign({id}, secret, {expiresIn: expiry * 1000})
+const createToken = ({_id}) => {
+    return jwt.sign({_id}, secret, {expiresIn: expiry * 1000})
 }
 
 exports.register = (req, res) => {
