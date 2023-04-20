@@ -19,5 +19,7 @@ const upload = multer({
 
 router.get('/home', authUser, postCTRL.home);
 router.post('/post', authUser, upload, postCTRL.post);
+router.post('/likes', authUser, postCTRL.likePost);
+router.post('/dislikes', authUser, postCTRL.dislikePost);
 
 module.exports = router;

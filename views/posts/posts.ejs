@@ -51,9 +51,11 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
+                                    <!-- form for adding post  -->
                                     <form class="form-group" action="/post" method="POST" enctype="multipart/form-data">
                                         <textarea class="form-control" name="post" id="" cols="10" rows="10"></textarea>
                                         <input class="form-control mt-2" type="file" name="postimage">
+                                        <input type="hidden" name="userid" value="<%= user._id %>">
                                         <button class="btn btn-dark btn-sm mt-2">Post</button>
                                     </form>
                                 </div>
@@ -72,7 +74,7 @@
                                     <img class="img-fluid post-pic" src="/userImages/<%= user.userimage %>" alt="">
                                 </div>
                                 <div class="col-md-10">
-                                    <p style="font-size: 0.7rem;"><%= user.name %></p>
+                                    <p style="font-size: 0.7rem;"><%= post.users[0].name %></p>
                                     <p style="font-size: 0.7rem; margin-top: -1rem;"><%= post.createdAt %></p>
                                 </div>
                             </div>
@@ -89,10 +91,35 @@
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-md-3" style=""><i class="fa-solid fa-thumbs-up"></i> Like</div>
-                            <div class="col-md-3" style=""><i class="fa-solid fa-thumbs-down"></i> Dislike</div>
-                            <div class="col-md-3" style=""><i class="fa-solid fa-comment"></i> Comment</div>
-                            <div class="col-md-3" style=""><i class="fa-brands fa-red-river"></i> Repost</div>
+                            <!-- forms for like, dislike, comment and reost  -->
+                            <div class="col-md-3" style="">
+                                <form class="form-group" id="formlikes" action="/likes" method="POST">
+                                    <input type="hidden" name="postId" value="<%= post._id %>">
+                                    <input type="hidden" name="userId" value="<%= user._id %>">
+                                    <button class="btn btn-sm btn-dark"><i class="fa-solid fa-thumbs-up"></i> Likes</button>
+                                </form>
+                            </div>
+                            <div class="col-md-3" style="">
+                                <form class="form-group" id="formlikes" action="/dislikes" method="POST">
+                                    <input type="hidden" name="postId" value="<%= post._id %>">
+                                    <input type="hidden" name="userId" value="<%= user._id %>">
+                                    <button class="btn btn-sm btn-dark"><i class="fa-solid fa-thumbs-down"></i> Dislikes</button>
+                                </form>
+                            </div>
+                            <div class="col-md-3" style="">
+                                <form class="form-group" id="formlikes" action="/comments" method="POST">
+                                    <input type="hidden" name="postId" value="<%= post._id %>">
+                                    <input type="hidden" name="userId" value="<%= user._id %>">
+                                    <button class="btn btn-sm btn-dark"><i class="fa-solid fa-thumbs-down"></i> Comments</button>
+                                </form>
+                            </div>
+                            <div class="col-md-3" style="">
+                                <form class="form-group" id="formlikes" action="/repost" method="POST">
+                                    <input type="hidden" name="postId" value="<%= post._id %>">
+                                    <input type="hidden" name="userId" value="<%= user._id %>">
+                                    <button class="btn btn-sm btn-dark"><i class="fa-solid fa-thumbs-down"></i> Repost</button>
+                                </form>
+                            </div>
                         </div>
                         </div>
                     <% } %>
