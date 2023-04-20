@@ -1,9 +1,21 @@
 const Post = require('../models/postsmodel');
 const User = require('../models/usermodel');
+const Comment = require('../models/comments');
 
 exports.home = async (req, res) => {
     try {
-        const posts = await Post.find().sort({createdAt: 'desc'}).populate('users');
+        const posts = await Post.find().sort({createdAt: 'desc'})
+        .populate('users')
+        .populate('likes')
+        .populate('dislikes')
+        // this carries the user name cause we have only stored the id 
+        .populate({
+            path: 'comments',
+            populate: {
+              path: 'user',
+              select: 'name'
+            }
+        })
         res.render('posts/posts', {posts});
     } catch (error) {
         console.log('Err on all posts route', error)
@@ -67,3 +79,24 @@ exports.dislikePost = async (req, res) => {
         console.log('Error on like post route', error)
       }
 }
+
+exports.comment = async (req, res) => {
+    try {
+        const { comment, commentuserid, postid } = req.body;
+        const user = await User.findById(commentuserid);
+        const post = await Post.findById(postid);
+        
+        const newComment = new Comment({
+            user: user._id,
+            comment: comment,
+        });
+        await newComment.save();
+
+        post.comments.push(newComment);
+        await post.save();
+
+        res.redirect('/home');
+    } catch (error) {
+        console.log(error);
+    }
+};
