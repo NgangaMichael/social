@@ -20,16 +20,18 @@ exports.adduser = async (req, res) => {
     try {
         const {name, age, email, gender, country, password} = req.body;
         const hashPass = await bcrypt.hash(password, 12);
-        const addUser = User.create({
+        const addUser = await User.create({
             name: name,
             email: email,
             age: age,
             country: country,
             gender: gender,
-            password: hashPass
+            password: hashPass,
+            image: req.file.filename
         })
         await addUser;
-        res.render('posts/posts')
+        res.redirect('/home')
+        // console.log(addUser)
     } catch (error) {
         console.log('Err on add user', error)
     }
