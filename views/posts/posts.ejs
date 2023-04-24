@@ -108,7 +108,7 @@
                                 </form>
                             </div>
                             <div class="col-md-3" style="">
-                                <button class="btn btn-sm btn-dark" id="comment-btn"><i class="fa-solid fa-thumbs-down"></i> Comment</button>
+                                <button class="btn btn-sm btn-dark comment-btn" data-postid="<%= post._id %>"><i class="fa-solid fa-thumbs-down"></i> Comment</button>
                             </div>
                             <div class="col-md-3" style="">
                                 <form class="form-group" action="/repost" method="POST">
@@ -118,7 +118,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="mt-3" id="comment-box" style="display: none;">
+                        <div class="mt-3 comment-box" id="comment-box-<%= post._id %>" style="display: none;">
                             <div class="row">
                                 <div class="col-md-2">
                                     <img class="img-fluid post-pic" src="/userImages/<%= user.image %>" alt="">
@@ -169,16 +169,21 @@
 
 <script>
 
-    const commentBtn = document.getElementById("comment-btn");
-    const commentBox = document.getElementById("comment-box");
+const commentBtns = document.querySelectorAll(".comment-btn");
 
-    commentBtn.addEventListener("click", () => {
+commentBtns.forEach(commentBtn => {
+  commentBtn.addEventListener("click", () => {
+    const postID = commentBtn.dataset.postid;
+    const commentBox = document.querySelector(`#comment-box-${postID}`);
+
     if (commentBox.style.display === "none") {
-        commentBox.style.display = "block";
+      commentBox.style.display = "block";
     } else {
-        commentBox.style.display = "none";
+      commentBox.style.display = "none";
     }
-    });
+  });
+});
+
 
 
     function toggleText() {
