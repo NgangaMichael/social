@@ -2,11 +2,11 @@
 <%- include('../templates/navbar.ejs') %>
 
 <div class="container-lg my-4">
-    <div class="row">
+    <div class="row" style="margin-top: 5.5rem;">
 
         <!-- left panel  -->
-        <div class="col-md-3">
-            <div class="container containerborder">
+        <div class="col-md-3 position-fixed" style="width: 23.5%;">
+            <div class="container containerborder ">
                 <img class="img-fluid profile-pic" src="/userImages/<%= user.image %>" alt="">
                 <% if (user) { %>
                     <p><strong><%= user.name %></strong></p>
@@ -25,13 +25,13 @@
         </div>
 
         <!-- center panel  -->
-        <div class="col-md-6">
+        <div class="col-md-6" style="overflow-y: auto; margin-left: 25%;">
             <div class="container containerborder">
                 <div class="row">
                     <div class="col-md-2">
                         <img class="img-fluid statusProfile" src="/userImages/<%= user.image %>" alt="">
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-10 ">
                         <!-- Button trigger modal -->
                         <input class="form-control" data-bs-toggle="modal" data-bs-target="#exampleModal" placeholder="Whats on your mind? <%= user.name %>"></input>
                         <!-- Modal -->
@@ -39,13 +39,12 @@
                             <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <div class="row">
-                                        <div class="col-md-3">
+                                    <div class="row w-100">
+                                        <div class="col-md-2">
                                             <img class="img-fluid post-pic" src="/userImages/<%= user.image %>" alt="">
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-md-10 puserdetails">
                                             <p style="font-size: 0.8rem;"><%= user.name %></p>
-                                            <p style="font-size: 0.8rem; margin-top: -1rem;">Whats on your mind</p>
                                         </div>
                                     </div>
                                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
@@ -53,7 +52,7 @@
                                 <div class="modal-body">
                                     <!-- form for adding post  -->
                                     <form class="form-group" action="/post" method="POST" enctype="multipart/form-data">
-                                        <textarea class="form-control" name="post" id="" cols="10" rows="10"></textarea>
+                                        <textarea class="form-control" placeholder="What's on your mind" name="post" id="" cols="10" rows="10"></textarea>
                                         <input class="form-control mt-2" type="file" name="postimage">
                                         <input type="hidden" name="userid" value="<%= user._id %>">
                                         <button class="btn btn-dark btn-sm mt-2">Post</button>
@@ -70,60 +69,112 @@
                         <hr>
                         <div class="container containerborder mt-3">
                             <div class="row g-1">
-                                <div class="col-md-2">
+                                <div class="col-lg-2">
                                     <img class="img-fluid post-pic" src="/userImages/<%= post.users[0].image %>" alt="">
                                 </div>
-                                <div class="col-md-10">
-                                    <p style="font-size: 0.7rem;"><%= post.users[0].name %></p>
-                                    <p style="font-size: 0.7rem; margin-top: -1rem;"><%= post.createdAt %></p>
+                                <div class="col-lg-10 puserdetails">
+                                    <p style="font-size: 0.7rem;"><strong><%= post.users[0].name %></strong></p>
+                                    <p style="font-size: 0.7rem; margin-top: -1rem; color: grey;"><%= post.createdAt %></p>
                                 </div>
                             </div>
-                            
-                        <div id="postTextContainer">
-                            <p class=""><%= post.post %></p>
-                        </div>
-                        <p id="seeMoreBtn" onclick="toggleText()" style="display:none; color: grey; cursor: pointer;">...See More</p>  
+                        
+                            <div class="post-container" data-postid="<%= post._id %>">
+                                <div class="post-text-container">
+                                  <p class="post-text" style="font-size: 0.9rem;"><%= post.post %></p>
+                                </div>
+                                <p class="see-more-btn" data-postid="<%= post.id %>" style="font-size: small; color: grey; cursor: pointer;" >...See More</p>
+                            </div>
+                        
                         <img class="img-fluid mb-3" src="/postsImages/<%= post.postimage %>" alt="">
                         <div class="row">
-                            <div class="col-md-3" style="color: grey; font-size: 0.7rem;">likes: <%= post.likes.length %></div>
-                            <div class="col-md-3" style="color: grey; font-size: 0.7rem;">dislikes: <%= post.dislikes.length %></div>
-                            <div class="col-md-3" style="color: grey; font-size: 0.7rem;">comments: <%= post.comments.length %></div>
-                            <div class="col-md-3" style="color: grey; font-size: 0.7rem;">reposts: <%= post.reposts.length %></div>
+                            <div class="col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-thumbs-up"></i> : <%= post.likes.length %></div>
+                            <div class="col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-thumbs-down"></i> : <%= post.dislikes.length %></div>
+                            <div class="col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-comments"></i> : <%= post.comments.length %></div>
+                            <div class="col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-recycle"></i> : <%= post.reposts.length %></div>
                         </div>
                         <hr>
                         <div class="row">
                             <!-- forms for like, dislike, comment and reost  -->
-                            <div class="col-md-3" style="">
+                            <div class="col-sm-3 actbtns" style="">
                                 <form class="form-group"  action="/likes" method="POST">
                                     <input type="hidden" name="postId" value="<%= post._id %>">
                                     <input type="hidden" name="userId" value="<%= user._id %>">
                                     <button class="btn btn-sm btn-dark"><i class="fa-solid fa-thumbs-up"></i> Like</button>
                                 </form>
                             </div>
-                            <div class="col-md-3" style="">
+                            <div class="col-sm-3 actbtns" style="">
                                 <form class="form-group" action="/dislikes" method="POST">
                                     <input type="hidden" name="postId" value="<%= post._id %>">
                                     <input type="hidden" name="userId" value="<%= user._id %>">
                                     <button class="btn btn-sm btn-dark"><i class="fa-solid fa-thumbs-down"></i> Dislike</button>
                                 </form>
                             </div>
-                            <div class="col-md-3" style="">
-                                <button class="btn btn-sm btn-dark comment-btn" data-postid="<%= post._id %>"><i class="fa-solid fa-thumbs-down"></i> Comment</button>
+                            <div class="col-sm-3 actbtns" style="">
+                                <button class="btn btn-sm btn-dark comment-btn" data-postid="<%= post._id %>"><i class="fa-solid fa-comment"></i> Comment</button>
                             </div>
-                            <div class="col-md-3" style="">
-                                <form class="form-group" action="/repost" method="POST">
-                                    <input type="hidden" name="postId" value="<%= post._id %>">
-                                    <input type="hidden" name="userId" value="<%= user._id %>">
-                                    <button class="btn btn-sm btn-dark"><i class="fa-solid fa-thumbs-down"></i> Repost</button>
-                                </form>
-                            </div>
+
+                            <% if (user._id && post.users[0]._id && user._id.toString() === post.users[0]._id.toString()) { %>
+   
+                                
+
+                            <% } else { %>
+                                
+                                <div class="col-sm-3 actbtns" style="">
+                                    <button type="button" class="btn btn-sm btn-dark comment-btn" data-bs-toggle="modal" data-bs-target="#postModal<%= post._id %>"><i class="fa-solid fa-recycle"></i> Repost</button>
+                                    <!-- <button class="btn btn-sm btn-dark comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="fa-solid fa-comment"></i> Repost</button> -->
+                                    <!-- Modal -->
+                                    <!-- <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+                                    <div class="modal fade" id="postModal<%= post._id %>" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div class="row w-100">
+                                                    <div class="col-md-2">
+                                                        <img class="img-fluid post-pic" src="/userImages/<%= user.image %>" alt="">
+                                                    </div>
+                                                    <div class="col-md-10 puserdetails">
+                                                        <p style="font-size: 0.8rem;"><%= user.name %></p>
+                                                        <p style="font-size: 0.8rem; margin-top: -1rem;">Repost </p>
+                                                    </div>
+                                                </div>
+                                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                                            </div>
+                                            <div class="modal-body">
+                                            <form class="form-group" action="/repost" method="POST" enctype="multipart/form-data">
+                                                <textarea class="form-control" placeholder="add comment" name="repost" id="" cols="10" rows="2"></textarea>
+                                                <input type="hidden" name="userid" value="<%= user._id %>">
+                                                <hr>
+    
+                                                <div class="repostcontainer" data-postid="<%= post._id %>">
+                                                    <div class="repostcontainertext">
+                                                      <p class="reposttext" style="font-size: 0.9rem;"><%= post.post %></p>
+                                                    </div>
+                                                    <p class="repostbtn" data-postid="<%= post._id %>" style="font-size: small; color: grey; cursor: pointer;" >...See More</p>
+                                                </div>
+                                                <!-- <p id="seeMoreBtn" onclick="toggleText()" style="display:none; color: grey; cursor: pointer; font-size: 0.7rem;">...See More</p>   -->
+                                                <img class="img-fluid mb-3" src="/postsImages/<%= post.postimage %>" alt="">
+                                                <div class="row">
+                                                    <div class="col-md-3" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-thumbs-up"></i> : <%= post.likes.length %></div>
+                                                    <div class="col-md-3" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-thumbs-down"></i> : <%= post.dislikes.length %></div>
+                                                    <div class="col-md-3" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-comments"></i> : <%= post.comments.length %></div>
+                                                    <div class="col-md-3"><button class="btn btn-dark btn-sm">Repost</button></div>
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            <% } %>
+                              
                         </div>
                         <div class="mt-3 comment-box" id="comment-box-<%= post._id %>" style="display: none;">
                             <div class="row">
                                 <div class="col-md-2">
                                     <img class="img-fluid post-pic" src="/userImages/<%= user.image %>" alt="">
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-10 puserdetails">
                                     <form class="form-group" action="/comment" method="POST">
                                         <input type="hidden" name="commentuserid" value="<%= user._id %>">
                                         <input type="hidden" name="postid" value="<%= post._id %>">
@@ -134,13 +185,14 @@
                             </div>
                             <% if (post.comments.length > 0) { %>
                                 <% for (comment of post.comments) { %>
-                                    <div class="row no-gutters">
+                                    <div class="row mt-2">
                                         <div class="col-md-2">
-                                            <p><%= comment.user.name %></p>
+                                            <img class="img-fluid post-pic" src="/userImages/<%= comment.user.image %>" alt="">
                                         </div>
-                                        <div class="col-md-10">
-                                            <p><%= comment.comment %></p>
-                                            <p><%= comment.createdAt %></p>
+                                        <div class="col-md-10 puserdetails">
+                                            <p style="font-size: 0.7rem;"><strong><%= comment.user.name %></strong></p>
+                                            <p style="font-size: 0.7rem; margin-top: -1rem; color: grey;"><%= comment.createdAt %></p>
+                                            <p style="font-size: 0.8rem; margin-top: -1rem;"><%= comment.comment %></p>
                                         </div>
                                     </div>
                                 <% } %>
@@ -168,9 +220,8 @@
 </div>
 
 <script>
-
+// script for comment 
 const commentBtns = document.querySelectorAll(".comment-btn");
-
 commentBtns.forEach(commentBtn => {
   commentBtn.addEventListener("click", () => {
     const postID = commentBtn.dataset.postid;
@@ -185,44 +236,111 @@ commentBtns.forEach(commentBtn => {
 });
 
 
-
-    function toggleText() {
-        var textContainer = document.getElementById("postTextContainer");
-        var p = document.getElementById("seeMoreBtn");
-    
-        if (textContainer.classList.contains("show")) {
-        textContainer.classList.remove("show");
-        p.innerHTML = "...See More";
+    // Get all "See More" buttons and add a click event listener to each
+    var seeMoreButtons = document.querySelectorAll(".see-more-btn");
+    seeMoreButtons.forEach(function(button) {
+    button.addEventListener("click", function() {
+        var postID = this.dataset.postid;
+        var postContainer = document.querySelector("[data-postid='" + postID + "']");
+        var postTextContainer = postContainer.querySelector(".post-text-container");
+        
+        // Toggle the post text container's visibility
+        if (postTextContainer.classList.contains("show")) {
+        postTextContainer.classList.remove("show");
+        this.textContent = "...See More";
         } else {
-        textContainer.classList.add("show");
-        p.innerHTML = "...See Less";
+        postTextContainer.classList.add("show");
+        this.textContent = "...See Less";
         }
-    }
+    });
+    });
+
+    // for repost modal 
+    var repostbtn = document.querySelectorAll(".repostbtn");
+    repostbtn.forEach(function(button) {
+    button.addEventListener("click", function() {
+        var repostid = this.dataset.postid;
+        var repostcontainer = document.querySelector("[data-postid='" + repostid + "']");
+        var reposttextcontainer = repostcontainer.querySelector(".repostcontainertext");
+
+        // Toggle the post text container's visibility
+        if (reposttextcontainer.classList.contains("show")) {
+        reposttextcontainer.classList.remove("show");
+        this.textContent = "...See More";
+        } else {
+        reposttextcontainer.classList.add("show");
+        this.textContent = "...See Less";
+        }
+    });
+    });
     
-    // Count the number of words in the text
-    var text = document.getElementById("postTextContainer").textContent.trim();
-    var wordCount = text.split(" ").length;
-    
-    // Show the "See More" button if the word count exceeds 20
-    if (wordCount > 20) {
-        var button = document.getElementById("seeMoreBtn");
-        button.style.display = "block";
-    }
     </script>
     
     <style>
-    #postTextContainer {
+    .post-text-container {
         overflow: hidden;
-        height: 4.5rem;
+        height: 4.3rem;
     }
     
-    #postTextContainer.show {
+    .post-text-container.show {
+        height: auto;
+    }
+
+    .repostcontainertext {
+        overflow: hidden;
+        height: 4.3rem;
+    }
+    
+    .repostcontainertext.show {
         height: auto;
     }
     
-    #seeMoreBtn {
-        display: block;
-        margin-top: 10px;
+    .fixed {
+    /* position: fixed;
+    left: 0;
+    z-index: 1; */
+    }
+
+    .userpanelcolumn {
+    flex: 0 0 auto; /* don't grow or shrink */
+    }
+
+    /* Extra small screens (phones) */
+    @media (max-width: 575.98px) {
+        .actbtns {
+            
+        }
+    }
+
+    /* Small screens (tablets) */
+    @media (min-width: 576px) and (max-width: 767.98px) {
+        
+    }
+
+    /* Medium screens (laptops) */
+    @media (min-width: 768px) and (max-width: 991.98px) {
+        
+    }
+
+    /* Large screens (desktops) */
+    @media (min-width: 992px) and (max-width: 1199.98px) {
+        .puserdetails {
+            margin-left: -2.5rem;
+        }
+    }
+
+    /* Extra large screens (large desktops) */
+    @media (min-width: 1200px) and (max-width: 1399.98px) {
+        .puserdetails {
+            margin-left: -2.5rem;
+        }
+    }
+
+    /* Extra-extra large screens (larger desktops) */
+    @media (min-width: 1400px) {
+        .puserdetails {
+            margin-left: -2.5rem;
+        }
     }
     </style>
 <%- include('../templates/footer.ejs') %>

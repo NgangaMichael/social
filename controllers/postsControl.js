@@ -13,7 +13,7 @@ exports.home = async (req, res) => {
             path: 'comments',
             populate: {
               path: 'user',
-              select: 'name'
+              select: ['name', 'image', 'email', 'age'],
             }
         })
         res.render('posts/posts', {posts});
@@ -39,6 +39,25 @@ exports.post = async (req, res) => {
     } catch (error) {
         console.log('Err on post post route', error)
     }
+}
+
+exports.repost = async (req, res) => {
+  try {
+    const {post, userid} = req.body;
+    const savepost = new Post({
+        post: post,
+        postimage: req.file.filename,
+    })
+    // await savepost.save();
+    // // finding id and pushing to array of user id in blogs model
+    // const user = await User.findById(userid);
+    // savepost.users.push(user._id);
+    // await savepost.save();
+
+    // res.redirect('/home');
+  } catch (error) {
+      console.log('Err on post post route', error)
+  }
 }
 
 exports.likePost = async (req, res) => {
