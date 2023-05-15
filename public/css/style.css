@@ -29,25 +29,11 @@
     /* background-color: rgb(31, 30, 30); */
 }
 
-.firstcon {
-    /* display: none; */
-    /* position: fixed;
-    width: 23.5%;
-    font-size: 0.9rem; */
-}
-.lastcon {
-    /* display: none; */
-} 
-
-.centerp {
-    /* overflow-y: auto; 
-    margin-left: 25%; */
-}
-
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .firstcon {
         display: none;
+        font-size: 0.8rem;
     }
     .lastcon {
         display: none;
@@ -83,9 +69,14 @@
     .lastcon {
         display: none;
     }
+    .firstcon {
+        font-size: 0.9rem;
+    }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-    
+    .firstcon {
+        font-size: 0.92rem;
+    }
 }

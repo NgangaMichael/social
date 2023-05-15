@@ -3,17 +3,30 @@
       <a class="navbar-brand text-dark" href="/home">
         <button class="btn btn-dark btn-sm"><strong> <i class="fa-solid fa-group-arrows-rotate" style="font-size: 1rem"></i> SOCIAL</strong></button>
       </a>
+
+      <a class="nav-link text-dark d-md-none" aria-current="page" href="/home"><i class="fa-solid fa-address-card" style="font-size: 1.2rem"></i></a>
+      <a class="nav-link text-dark d-md-none" aria-current="page" href="/home"><i class="fa-solid fa-bell" style="font-size: 1.2rem"></i></a>
+      <a class="nav-link text-dark d-md-none" aria-current="page" href="/home"><i class="fa-sharp fa-solid fa-message" style="font-size: 1.2rem"></i></a>
+      <a class="nav-link text-dark d-md-none" aria-current="page" href="/home"><i class="fa-solid fa-group-arrows-rotate" style="font-size: 1.2rem"></i></a>  
+      <a class="nav-link text-dark d-md-none" aria-current="page" href="/home"><i class="fa-solid fa-network-wired" style="font-size: 1.2rem"></i></a>  
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"><i class="fa-solid fa-burger" style="font-size: 2rem;"></i></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      
+      <div class="collapse navbar-collapse navbarlg" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <!-- <li class="nav-item">
             <a class="nav-link text-dark" aria-current="page" href="/home"><i class="fa-solid fa-house"></i></a>
           </li> -->
         </ul>
-        <form class="d-flex searchformnav">
+        <form class="d-flex searchformnav d-none d-md-block">
           <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        </form>
+
+        <!-- logout form  -->
+        <form class="form-group d-md-none" action="/logout" method="POST">
+          <button class="btn btn-dark btn-sm">logout</button>
         </form>
       </div>
     </div>
