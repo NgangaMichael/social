@@ -17,6 +17,7 @@ const upload = multer({
 }).single('image')
 
 router.get('/', userCTRL.register);
+router.get('/policy', userCTRL.policy);
 router.post('/adduser', upload, userCTRL.adduser);
 router.post('/login', userCTRL.login);
 router.post('/logout', userCTRL.logout);

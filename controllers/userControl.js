@@ -66,3 +66,10 @@ exports.logout = async (req, res) => {
         console.log('Error on logout', error)
     }
 }
+exports.policy = (req, res) => {
+    try {
+        res.render('users/policy')
+    } catch (error) {
+        console.log('Err on home route')
+    }
+};
