@@ -3,9 +3,8 @@
 
 <div class="container-lg my-4">
     <div class="row" style="margin-top: 5.5rem;">
-
         <!-- left panel  -->
-        <div class="col-md-3 position-fixed" style="width: 23.5%;">
+        <div class="col-md-4 col-lg-3 firstcon">
             <div class="container containerborder ">
                 <img class="img-fluid profile-pic" src="/userImages/<%= user.image %>" alt="">
                 <% if (user) { %>
@@ -25,15 +24,18 @@
         </div>
 
         <!-- center panel  -->
-        <div class="col-md-6" style="overflow-y: auto; margin-left: 25%;">
+        <div class="col-md-8 col-lg-6 centerp">
             <div class="container containerborder">
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-2 col-md-2">
                         <img class="img-fluid statusProfile" src="/userImages/<%= user.image %>" alt="">
                     </div>
-                    <div class="col-md-10 ">
+                    <div class="col-10 col-md-10 ">
                         <!-- Button trigger modal -->
                         <input class="form-control" data-bs-toggle="modal" data-bs-target="#exampleModal" placeholder="Whats on your mind? <%= user.name %>"></input>
+                        <!-- <form class="d-flex searchform">
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        </form> -->
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -69,10 +71,10 @@
                         <hr>
                         <div class="container containerborder mt-3">
                             <div class="row g-1">
-                                <div class="col-lg-2">
+                                <div class="col-2 col-lg-2">
                                     <img class="img-fluid post-pic" src="/userImages/<%= post.users[0].image %>" alt="">
                                 </div>
-                                <div class="col-lg-10 puserdetails">
+                                <div class="col-10 col-lg-10 puserdetails">
                                     <p style="font-size: 0.7rem;"><strong><%= post.users[0].name %></strong></p>
                                     <p style="font-size: 0.7rem; margin-top: -1rem; color: grey;"><%= new Date(post.createdAt).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }) %>                                    </p>
                                 </div>
@@ -87,31 +89,31 @@
                         
                         <img class="img-fluid mb-3" src="/postsImages/<%= post.postimage %>" alt="">
                         <div class="row">
-                            <div class="col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-thumbs-up"></i> : <%= post.likes.length %></div>
-                            <div class="col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-thumbs-down"></i> : <%= post.dislikes.length %></div>
-                            <div class="col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-comments"></i> : <%= post.comments.length %></div>
-                            <div class="col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-recycle"></i> : <%= post.reposts.length %></div>
+                            <div class="col-3 col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-thumbs-up"></i> : <%= post.likes.length %></div>
+                            <div class="col-3 col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-thumbs-down"></i> : <%= post.dislikes.length %></div>
+                            <div class="col-3 col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-comments"></i> : <%= post.comments.length %></div>
+                            <div class="col-3 col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-recycle"></i> : <%= post.reposts.length %></div>
                         </div>
                         
                         <hr>
                         <div class="row">
                             <!-- forms for like, dislike, comment and reost  -->
-                            <div class="col-sm-3 actbtns" style="">
+                            <div class="col-3 col-sm-3 actbtns" style="">
                                 <form class="form-group"  action="/likes" method="POST">
                                     <input type="hidden" name="postId" value="<%= post._id %>">
                                     <input type="hidden" name="userId" value="<%= user._id %>">
-                                    <button class="btn btn-sm btn-dark"><i class="fa-solid fa-thumbs-up"></i> Like</button>
+                                    <button class="btn btn-sm btn-dark"><i class="fa-solid fa-thumbs-up"></i> <span class="d-none d-md-inline-block">Like</span></button>
                                 </form>
                             </div>
-                            <div class="col-sm-3 actbtns" style="">
+                            <div class="col-3 col-sm-3 actbtns" style="">
                                 <form class="form-group" action="/dislikes" method="POST">
                                     <input type="hidden" name="postId" value="<%= post._id %>">
                                     <input type="hidden" name="userId" value="<%= user._id %>">
-                                    <button class="btn btn-sm btn-dark"><i class="fa-solid fa-thumbs-down"></i> Dislike</button>
+                                    <button class="btn btn-sm btn-dark"><i class="fa-solid fa-thumbs-down"></i> <span class="d-none d-md-inline-block">Dislike</span></button>
                                 </form>
                             </div>
-                            <div class="col-sm-3 actbtns" style="">
-                                <button class="btn btn-sm btn-dark comment-btn" data-postid="<%= post._id %>"><i class="fa-solid fa-comment"></i> Comment</button>
+                            <div class="col-3 col-sm-3 actbtns" style="">
+                                <button class="btn btn-sm btn-dark comment-btn" data-postid="<%= post._id %>"><i class="fa-solid fa-comment"></i> <span class="d-none d-md-inline-block">Comment</span></button>
                             </div>
 
                             <% if (user._id && post.users[0]._id && user._id.toString() === post.users[0]._id.toString()) { %>
@@ -120,8 +122,8 @@
 
                             <% } else { %>
                                 
-                                <div class="col-sm-3 actbtns" style="">
-                                    <button type="button" class="btn btn-sm btn-dark comment-btn" data-bs-toggle="modal" data-bs-target="#postModal<%= post._id %>"><i class="fa-solid fa-recycle"></i> Repost</button>
+                                <div class="col-3 col-sm-3 actbtns" style="">
+                                    <button type="button" class="btn btn-sm btn-dark comment-btn" data-bs-toggle="modal" data-bs-target="#postModal<%= post._id %>"><i class="fa-solid fa-recycle"></i> <span class="d-none d-md-inline-block">Repost</span></button>
                                     <!-- <button class="btn btn-sm btn-dark comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="fa-solid fa-comment"></i> Repost</button> -->
                                     <!-- Modal -->
                                     <!-- <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
@@ -216,7 +218,7 @@
         </div>
 
         <!-- right panel  -->
-        <div class="col-md-3">
+        <div class="col-lg-3 lastcon">
             <div class="container containerborder">
                 <h6>Groups</h6>
                 <p>No groups yet</p>

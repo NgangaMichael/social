@@ -24,3 +24,68 @@
 .containerbordernavbar {
     box-shadow: 0px 1px 3px rgba(37, 37, 37, 0.3);
 }
+
+.navbar-toggler {
+    /* background-color: rgb(31, 30, 30); */
+}
+
+.firstcon {
+    /* display: none; */
+    /* position: fixed;
+    width: 23.5%;
+    font-size: 0.9rem; */
+}
+.lastcon {
+    /* display: none; */
+} 
+
+.centerp {
+    /* overflow-y: auto; 
+    margin-left: 25%; */
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .firstcon {
+        display: none;
+    }
+    .lastcon {
+        display: none;
+    }
+    .searchformnav {
+        display: none;
+    }
+    .postics {
+        /* display: grid; */
+    }
+    .statusProfile {
+        box-shadow: 0px 1px 3px rgba(37, 37, 37, 0.3);
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+    }
+    
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+    .firstcon {
+        display: none;
+    }
+    .lastcon {
+        display: none;
+    }
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .lastcon {
+        display: none;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    
+}
