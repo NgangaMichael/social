@@ -43,20 +43,14 @@ exports.post = async (req, res) => {
 
 exports.repost = async (req, res) => {
   try {
-    const {post, userid} = req.body;
-    const savepost = new Post({
-        post: post,
-        postimage: req.file.filename,
-    })
-    // await savepost.save();
-    // // finding id and pushing to array of user id in blogs model
-    // const user = await User.findById(userid);
-    // savepost.users.push(user._id);
-    // await savepost.save();
+    const {post, userid, postid} = req.body;
+    console.log(post)
+    console.log(userid)
+    console.log(postid)
 
-    // res.redirect('/home');
+    res.redirect('/home');
   } catch (error) {
-      console.log('Err on post post route', error)
+      console.log('Err on repost route', error)
   }
 }
 

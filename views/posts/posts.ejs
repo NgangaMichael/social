@@ -105,25 +105,25 @@
                         <hr>
                         <div class="row">
                             <!-- forms for like, dislike, comment and reost  -->
-                            <div class="col-3 col-sm-3 actbtns" style="">
+                            <div class="col-3 col-sm-3 actbtns">
                                 <form class="form-group"  action="/likes" method="POST">
                                     <input type="hidden" name="postId" value="<%= post._id %>">
                                     <input type="hidden" name="userId" value="<%= user._id %>">
                                     <button class="btn btn-sm btn-dark"><i class="fa-solid fa-thumbs-up"></i> <span class="d-none d-md-inline-block">Like</span></button>
                                 </form>
                             </div>
-                            <div class="col-3 col-sm-3 actbtns" style="">
+                            <div class="col-3 col-sm-3 actbtns">
                                 <form class="form-group" action="/dislikes" method="POST">
                                     <input type="hidden" name="postId" value="<%= post._id %>">
                                     <input type="hidden" name="userId" value="<%= user._id %>">
                                     <button class="btn btn-sm btn-dark"><i class="fa-solid fa-thumbs-down"></i> <span class="d-none d-md-inline-block">Dislike</span></button>
                                 </form>
                             </div>
-                            <div class="col-3 col-sm-3 actbtns" style="">
+                            <div class="col-3 col-sm-3 actbtns">
                                 <button class="btn btn-sm btn-dark comment-btn" data-postid="<%= post._id %>"><i class="fa-solid fa-comment"></i> <span class="d-none d-md-inline-block">Comment</span></button>
                             </div>
                                 
-                                <div class="col-3 col-sm-3 actbtns" style="">
+                                <div class="col-3 col-sm-3 actbtns">
                                     <button type="button" class="btn btn-sm btn-dark comment-btn" data-bs-toggle="modal" data-bs-target="#postModal<%= post._id %>"><i class="fa-solid fa-recycle"></i> <span class="d-none d-md-inline-block">Repost</span></button>
                                     <!-- <button class="btn btn-sm btn-dark comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="fa-solid fa-comment"></i> Repost</button> -->
                                     <!-- Modal -->
@@ -145,8 +145,10 @@
                                             </div>
                                             <div class="modal-body">
                                             <form class="form-group" action="/repost" method="POST" enctype="multipart/form-data">
-                                                <textarea class="form-control" placeholder="add comment" name="repost" id="" cols="10" rows="2"></textarea>
+                                                <textarea class="form-control" placeholder="add comment" name="post" id="" cols="10" rows="2"></textarea>
                                                 <input type="hidden" name="userid" value="<%= user._id %>">
+                                                <input type="hidden" name="postid" value="<%= post._id %>">
+                                                <input class="d-none" type="file" value="../../public/postsImages/1681895191922min2.avif" name="postimage">
                                                 <hr>
     
                                                 <div class="repostcontainer" data-postid="<%= post._id %>">
@@ -303,11 +305,6 @@ commentBtns.forEach(commentBtn => {
         height: auto;
     }
     
-    .fixed {
-    /* position: fixed;
-    left: 0;
-    z-index: 1; */
-    }
 
     .userpanelcolumn {
     flex: 0 0 auto; /* don't grow or shrink */
@@ -315,9 +312,7 @@ commentBtns.forEach(commentBtn => {
 
     /* Extra small screens (phones) */
     @media (max-width: 575.98px) {
-        .actbtns {
-            
-        }
+
     }
 
     /* Small screens (tablets) */
