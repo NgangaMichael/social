@@ -18,7 +18,7 @@ const postSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Comment'
     }],
-    reposts: [{
+    repostof: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Repost'
     }]

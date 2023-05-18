@@ -44,9 +44,17 @@ exports.post = async (req, res) => {
 exports.repost = async (req, res) => {
   try {
     const {post, userid, postid} = req.body;
-    console.log(post)
-    console.log(userid)
-    console.log(postid)
+    const originalpost = await Post.findById(postid);
+
+    const saverpost = new Post({
+      post: originalpost.post,
+      postimage: originalpost.postimage
+    })
+
+    await saverpost.save();
+    saverpost.users.push(userid);
+    saverpost.reposts.push(postid);
+    await saverpost.save();
 
     res.redirect('/home');
   } catch (error) {

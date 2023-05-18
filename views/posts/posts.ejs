@@ -99,7 +99,7 @@
                             <div class="col-3 col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-thumbs-up"></i> : <%= post.likes.length %></div>
                             <div class="col-3 col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-thumbs-down"></i> : <%= post.dislikes.length %></div>
                             <div class="col-3 col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-comments"></i> : <%= post.comments.length %></div>
-                            <div class="col-3 col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-recycle"></i> : <%= post.reposts.length %></div>
+                            <div class="col-3 col-sm-3 actbtns" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-recycle"></i></div>
                         </div>
                         
                         <hr>
@@ -144,6 +144,13 @@
                                             <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                                             </div>
                                             <div class="modal-body">
+                                            <form action="/repost" method="POST">
+                                                <textarea class="form-control" placeholder="add comment" name="post" id="" cols="10" rows="2"></textarea>
+                                                <input type="hidden" name="userid" value="<%= user._id %>">
+                                                <input type="hidden" name="postid" value="<%= post._id %>">
+                                                <button>repost</button>
+                                            </form>
+
                                             <form class="form-group" action="/repost" method="POST" enctype="multipart/form-data">
                                                 <textarea class="form-control" placeholder="add comment" name="post" id="" cols="10" rows="2"></textarea>
                                                 <input type="hidden" name="userid" value="<%= user._id %>">
@@ -163,8 +170,9 @@
                                                     <div class="col-md-3" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-thumbs-up"></i> : <%= post.likes.length %></div>
                                                     <div class="col-md-3" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-thumbs-down"></i> : <%= post.dislikes.length %></div>
                                                     <div class="col-md-3" style="color: grey; font-size: 0.7rem;"><i class="fa-solid fa-comments"></i> : <%= post.comments.length %></div>
-                                                    <div class="col-md-3"><button class="btn btn-dark btn-sm">Repost</button></div>
+                                                    <div class="col-md-3"></div>
                                                 </div>
+                                                <button class="btn btn-dark btn-sm">Repost</button>
                                             </form>
                                             </div>
                                         </div>
@@ -224,8 +232,15 @@
                 <h6>Groups</h6>
                 <p>No groups yet</p>
             </div>
-        </div>
 
+            <div class="container containerborder w-25 fixed-bottom" style="margin-right: 0%; display: flex; align-items: center;">
+                <img class="img-fluid post-pic" src="/userImages/<%= user.image %>" alt="">
+                <h6 class="" style="margin-left: 1rem">Messages</h6>
+                <i class="fa-solid fa-arrow-up" style="margin-left: auto;"></i>
+            </div>
+            
+            
+        </div>
     </div>
 </div>
 
