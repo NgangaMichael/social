@@ -242,7 +242,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt distinctio consequuntur porro ad temporibus. Ab libero earum laudantium optio omnis a quisquam. Cum tenetur non saepe iure consectetur eveniet quas.
             </div>
 
-            <div id="newmessagecont" class="container bg-white containerborder w-25 fixed-bottom" style="max-height: 70%; overflow-y: auto;">
+            <!-- <div id="newmessagecont" class="container bg-white containerborder w-25 fixed-bottom" style="max-height: 70%; overflow-y: auto;">
                 <div style="display: flex; align-items: center;">
                     <h6 class="" style="margin-left: 1rem; font-size: 0.9rem">New Message</h6>
                     <i class="fa-solid fa-arrows-up-down" style="margin-left: auto; cursor: pointer;" onclick="toggleDiv()"></i>
@@ -262,9 +262,15 @@
                 </form>
                 <hr>
                 <button class="btn btn-dark btn-sm">send</button>
-            </div>
-            
-            
+            </div> -->
+
+            <div id="newmessagecont1" style="display: none;">Div 1</div>
+            <div id="newmessagecont2" style="display: none;">Div 2</div>
+            <div id="newmessagecont3" style="display: none;">Div 3</div>
+
+            <button id="toggleButton" onclick="toggleNextDiv()">Toggle Next Div</button>
+
+    
             <div class="container containerborder w-25 fixed-bottom" style="margin-right: 0%; display: flex; align-items: center;">
                 <img class="img-fluid post-pic" src="/userImages/<%= user.image %>" alt="">
                 <h6 class="" style="margin-left: 1rem">Messages</h6>
@@ -284,11 +290,27 @@ function toggleDiv() {
   div.style.display = (div.style.display === "none") ? "block" : "none";
 }
 
+var divCount = 0;
+  var divs = ['newmessagecont1', 'newmessagecont2', 'newmessagecont3'];
+  var currentIndex = 0;
 
-function toggleNewmess() {
-  var div = document.getElementById("newmessagecont");
-  div.style.display = (div.style.display === "none") ? "block" : "none";
-}
+  function toggleNextDiv() {
+    if (currentIndex < divs.length) {
+      var div = document.getElementById(divs[currentIndex]);
+      
+      // Toggle the display property
+      if (div.style.display === "none") {
+        div.style.display = "block";
+        divCount++; // Increment the div count
+      } else {
+        div.style.display = "none";
+        divCount--; // Decrement the div count
+      }
+      
+      currentIndex++;
+    }
+  }
+
 
 // script for comment 
 const commentBtns = document.querySelectorAll(".comment-btn");
