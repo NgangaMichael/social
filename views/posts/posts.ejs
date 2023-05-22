@@ -233,13 +233,14 @@
                 <p>No groups yet</p>
             </div>
 
-            <div id="listofmessage" class="container containerborder w-25 fixed-bottom" style="margin-right: 0%; margin-bottom: 4rem; max-height: 38%; overflow-y: auto;">
+            <div id="listofmessage" class="container d-none containerborder w-25 fixed-bottom" style="margin-right: 0%; margin-bottom: 4rem; max-height: 38%; overflow-y: auto;">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt distinctio consequuntur porro ad temporibus. Ab libero earum laudantium optio omnis a quisquam. Cum tenetur non saepe iure consectetur eveniet quas.
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt distinctio consequuntur porro ad temporibus. Ab libero earum laudantium optio omnis a quisquam. Cum tenetur non saepe iure consectetur eveniet quas.
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt distinctio consequuntur porro ad temporibus. Ab libero earum laudantium optio omnis a quisquam. Cum tenetur non saepe iure consectetur eveniet quas.
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt distinctio consequuntur porro ad temporibus. Ab libero earum laudantium optio omnis a quisquam. Cum tenetur non saepe iure consectetur eveniet quas.
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt distinctio consequuntur porro ad temporibus. Ab libero earum laudantium optio omnis a quisquam. Cum tenetur non saepe iure consectetur eveniet quas.
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt distinctio consequuntur porro ad temporibus. Ab libero earum laudantium optio omnis a quisquam. Cum tenetur non saepe iure consectetur eveniet quas.
+            
             </div>
 
             <!-- first div box  -->
@@ -319,10 +320,9 @@
                 <img class="img-fluid post-pic" src="/userImages/<%= user.image %>" alt="">
                 <h6 class="" style="margin-left: 1rem">Messages</h6>
                 <i class="fa-solid fa-ellipsis" style="margin-left: auto;"></i>
-                <i id="toggleButton" class="fa-sharp fa-solid fa-feather" style="margin-left: auto; cursor: pointer;" onclick="toggleNextDiv()"></i>
+                <i class="fa-sharp fa-solid fa-feather" style="margin-left: auto; cursor: pointer;" onclick="toggleNextDiv()"></i>
                 <i class="fa-solid fa-arrows-up-down" style="margin-left: auto; cursor: pointer;" onclick="toggleDiv()"></i>
             </div>
-            
         </div>
     </div>
 </div>
@@ -330,9 +330,10 @@
 <script>
 
 function toggleDiv() {
-  var div = document.getElementById("listofmessage");
-  div.style.display = (div.style.display === "none") ? "block" : "none";
+  var listofmessage = document.getElementById('listofmessage');
+  listofmessage.classList.toggle('d-none');
 }
+
 
 document.addEventListener('DOMContentLoaded', function() {
   var closeIcons = document.getElementsByClassName('close-icon');
