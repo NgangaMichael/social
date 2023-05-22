@@ -12,11 +12,11 @@
                   <% } else { %>
                     <p>Welcome guest!</p>
                 <% } %>
-                <p><i class="fa-solid fa-address-card"></i> Profile</p>
-                <p><i class="fa-solid fa-bell"></i> Notifications</p>
-                <p><i class="fa-sharp fa-solid fa-message"></i> Messages</p>
-                <p><i class="fa-solid fa-group-arrows-rotate"></i> Groups</p>
-                <p><i class="fa-solid fa-network-wired"></i> Network</p>
+                <a style="color: black; text-decoration: none;" href="/profile"><p><i class="fa-solid fa-address-card"></i> Profile</p></a>
+                <a style="color: black; text-decoration: none;" href="/notifications"><p><i class="fa-solid fa-bell"></i> Notifications</p></a>
+                <a style="color: black; text-decoration: none;" href="/messages"><p><i class="fa-sharp fa-solid fa-message"></i> Messages</p></a>
+                <a style="color: black; text-decoration: none;" href="/groups"><p><i class="fa-solid fa-group-arrows-rotate"></i> Groups</p></a>
+                <a style="color: black; text-decoration: none;" href="/network"><p><i class="fa-solid fa-network-wired"></i> Network</p></a>
                 <form class="form-group" action="/logout" method="POST">
                     <button class="btn btn-dark btn-sm">logout</button>
                 </form>
@@ -112,6 +112,7 @@
                                     <button class="btn btn-sm btn-dark"><i class="fa-solid fa-thumbs-up"></i> <span class="d-none d-md-inline-block">Like</span></button>
                                 </form>
                             </div>
+                            
                             <div class="col-3 col-sm-3 actbtns">
                                 <form class="form-group" action="/dislikes" method="POST">
                                     <input type="hidden" name="postId" value="<%= post._id %>">

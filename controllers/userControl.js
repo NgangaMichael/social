@@ -16,6 +16,46 @@ exports.register = (req, res) => {
     }
 };
 
+exports.profile = (req, res) => {
+    try {
+        res.render('users/profile')
+    } catch (error) {
+        console.log('Err on home route')
+    }
+};
+
+exports.notifications = (req, res) => {
+    try {
+        res.render('users/notifications')
+    } catch (error) {
+        console.log('Err on home route')
+    }
+};
+
+exports.messages = (req, res) => {
+    try {
+        res.render('users/messages')
+    } catch (error) {
+        console.log('Err on home route')
+    }
+};
+
+exports.groups = (req, res) => {
+    try {
+        res.render('users/groups')
+    } catch (error) {
+        console.log('Err on home route')
+    }
+};
+
+exports.network = (req, res) => {
+    try {
+        res.render('users/network')
+    } catch (error) {
+        console.log('Err on home route')
+    }
+};
+
 exports.adduser = async (req, res) => {
     try {
         const {name, age, email, gender, country, password} = req.body;
