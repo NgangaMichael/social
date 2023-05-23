@@ -20,13 +20,16 @@ exports.register = (req, res) => {
 
 exports.profile = async (req, res) => {
     try {
-        const posts = await Post.find()
+        const userId1 = req.params.id;
+        const userID = await User.findById(userId1);
+
+        const posts = await Post.find({
+            users: userID
+        })
         .sort({createdAt: 'desc'})
         .populate('users')
         .populate('likes')
         .populate('dislikes')
-        
-        // this carries the user name cause we have only stored the id 
         .populate({
             path: 'comments',
             populate: {
@@ -35,6 +38,15 @@ exports.profile = async (req, res) => {
             }
         })
         res.render('users/profile', {posts});
+        // console.log(posts)
+    } catch (error) {
+        console.log('Err on home route', error)
+    }
+};
+
+exports.editprofile = async (req, res) => {
+    try {
+        console.log('Working');
     } catch (error) {
         console.log('Err on home route')
     }

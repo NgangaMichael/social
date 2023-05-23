@@ -17,7 +17,8 @@ const upload = multer({
 }).single('image')
 
 router.get('/', userCTRL.register);
-router.get('/profile', userCTRL.profile);
+router.get('/profile/:id', userCTRL.profile);
+router.get('/profile/:id/edit', userCTRL.editprofile);
 router.get('/notifications', userCTRL.notifications);
 router.get('/messages', userCTRL.messages);
 router.get('/groups', userCTRL.groups);
