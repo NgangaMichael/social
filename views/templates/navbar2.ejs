@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-md containerbordernavbar fixed-top" style="background-color: white;">
+    <div class="container-lg text-dark navcontainer">
+      <a class="navbar-brand text-dark" href="/home">
+        <button class="btn btn-dark btn-sm"><strong> <i class="fa-solid fa-group-arrows-rotate" style="font-size: 1rem"></i> SOCIAL</strong></button>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><i class="fa-solid fa-burger" style="font-size: 2rem;"></i></span>
+      </button>
+      
+      <div class="collapse navbar-collapse d-flex justify-content-evenly" id="navbarSupportedContent">
+        <div class="d-flex">
+            <a class="nav-link text-dark" aria-current="page" href="/home"><i class="fa-solid fa-address-card" style="font-size: 1.2rem"></i></a>
+            <a class="nav-link text-dark" aria-current="page" href="/notifications"><i class="fa-solid fa-bell" style="font-size: 1.2rem"></i></a>
+            <a class="nav-link text-dark" aria-current="page" href="/messages"><i class="fa-sharp fa-solid fa-message" style="font-size: 1.2rem"></i></a>
+            <a class="nav-link text-dark" aria-current="page" href="/groups"><i class="fa-solid fa-group-arrows-rotate" style="font-size: 1.2rem"></i></a>  
+            <a class="nav-link text-dark" aria-current="page" href="/network"><i class="fa-solid fa-network-wired" style="font-size: 1.2rem"></i></a>        
+        </div>
+      </div>
+
+       <!-- logout form  -->
+       <form class="form-group float-end" action="/logout" method="POST">
+        <button class="btn btn-dark btn-sm">logout</button>
+      </form>
+    </div>
+</nav>

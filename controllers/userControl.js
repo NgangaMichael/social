@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const expiry = 60 * 60 * 1;
 const secret = 'mancity';
+const Post = require('../models/postsmodel');
+const Comment = require('../models/comments');
 
 const createToken = ({_id}) => {
     return jwt.sign({_id}, secret, {expiresIn: expiry * 1000})
@@ -16,9 +18,23 @@ exports.register = (req, res) => {
     }
 };
 
-exports.profile = (req, res) => {
+exports.profile = async (req, res) => {
     try {
-        res.render('users/profile')
+        const posts = await Post.find()
+        .sort({createdAt: 'desc'})
+        .populate('users')
+        .populate('likes')
+        .populate('dislikes')
+        
+        // this carries the user name cause we have only stored the id 
+        .populate({
+            path: 'comments',
+            populate: {
+              path: 'user',
+              select: ['name', 'image', 'email', 'age'],
+            }
+        })
+        res.render('users/profile', {posts});
     } catch (error) {
         console.log('Err on home route')
     }
