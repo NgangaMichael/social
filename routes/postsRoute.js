@@ -23,5 +23,6 @@ router.post('/repost', authUser, postCTRL.repost);
 router.post('/comment', authUser, upload, postCTRL.comment);
 router.post('/likes', authUser, postCTRL.likePost);
 router.post('/dislikes', authUser, postCTRL.dislikePost);
+router.delete('/deletepost/:id', authUser, postCTRL.deletepost);
 
 module.exports = router;

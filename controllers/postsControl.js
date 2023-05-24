@@ -121,3 +121,9 @@ exports.comment = async (req, res) => {
         console.log(error);
     }
 };
+
+exports.deletepost = async (req, res) => {
+  const {id} = req.params;
+  await Post.findByIdAndRemove(id)
+  res.redirect(`/profile/${id}`)
+}
