@@ -44,13 +44,24 @@ exports.profile = async (req, res) => {
     }
 };
 
-exports.editprofile = async (req, res) => {
+exports.editprofile = async(req, res) => {
     try {
-        console.log('Working');
+        const {username, email, age, gender, country} = req.body;
+        const {id} = req.params;
+        await User.findByIdAndUpdate(id, {
+            name: username,
+            email: email,
+            age: age,
+            gender: gender,
+            country: country,
+            image: req.file.filename
+        })
+        res.redirect(`/profile/${id}`)
     } catch (error) {
-        console.log('Err on home route')
+        console.log('Err on update', error)
     }
-};
+}
+
 
 exports.notifications = (req, res) => {
     try {

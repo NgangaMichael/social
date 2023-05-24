@@ -18,7 +18,7 @@ const upload = multer({
 
 router.get('/', userCTRL.register);
 router.get('/profile/:id', userCTRL.profile);
-router.get('/profile/:id/edit', userCTRL.editprofile);
+router.patch('/updateprofile/:id', upload, userCTRL.editprofile);
 router.get('/notifications', userCTRL.notifications);
 router.get('/messages', userCTRL.messages);
 router.get('/groups', userCTRL.groups);

@@ -7,8 +7,13 @@
             <div class="container containerborder" style="font-size: 0.9rem;">
                 <img class="img-fluid profile-pic" src="/userImages/<%= user.image %>" alt="">
                 <% if (user) { %>
-                    <a style="color: black; text-decoration: none;" href="/profile/<%= user._id %>/edit"><p><i class="fa-solid fa-pen-to-square"></i> Edit Profile</p></a>
-                    <p style="margin-top: 0rem;">Name: <strong><%= user.name %></strong></p>
+                    <p></p>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+                    </button>
+
+                    <p style="margin-top: 1rem;">Name: <strong><%= user.name %></strong></p>
                     <p style="margin-top: -0.8rem;">Email: <strong><%= user.email %></strong></p>
                     <p style="margin-top: -0.8rem;">Age: <strong><%= user.age %></strong></p>
                     <p style="margin-top: -0.8rem;">Gender: <strong><%= user.gender %></strong></p>
@@ -16,6 +21,49 @@
                   <% } else { %>
                     <p>Welcome guest!</p>
                 <% } %>
+            </div>
+        </div>
+
+        <!-- modal for editing profile  -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h6 class="modal-title" id="exampleModalLabel">Edit your profile</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-group" id="editformsubmit" action="/updateprofile/<%= user._id %>?_method=PATCH" method="POST" enctype="multipart/form-data">
+                        <label for="">Name</label>
+                        <input class="form-control mt-2" name="username" value="<%= user.name %>" type="text">
+                        <label for="">Email</label>
+                        <input class="form-control mt-2" name="email" value="<%= user.email %>" type="email">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="">Age</label>
+                                <input class="form-control mt-2" name="age" value="<%= user.age %>" type="number">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="">Gender</label>
+                                <select class="form-control mt-2" name="gender" id="">
+                                    <option value="name">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="">Country</label>
+                                <input class="form-control mt-2" name="country" value="<%= user.country %>" type="text">
+                            </div>
+                        </div>
+                        <label for="">User profile pic</label>
+                        <input class="form-control mt-2" name="image" type="file">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-dark btn-sm" data-bs-dismiss="modal">Close</button>
+                <button type="submit" form="editformsubmit" class="btn btn-dark btn-sm">Save changes</button>
+                </div>
+            </div>
             </div>
         </div>
 
