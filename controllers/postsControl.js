@@ -41,6 +41,16 @@ exports.post = async (req, res) => {
     }
 }
 
+exports.editpostpage = async (req, res) => {
+  try {
+    const {id} = req.params;
+    const post = await Post.findById(id);
+    res.render('posts/editpostpage', {post})
+  } catch (error) {
+    console.log('Error on edit post page', error)
+  }
+}
+
 exports.repost = async (req, res) => {
   try {
     const {post, userid, postid} = req.body;
@@ -123,7 +133,9 @@ exports.comment = async (req, res) => {
 };
 
 exports.deletepost = async (req, res) => {
-  const {id} = req.params;
-  await Post.findByIdAndRemove(id)
-  res.redirect(`/profile/${id}`)
+  const { id } = req.params;
+  await Post.findByIdAndRemove(id);
+  // redirect to the same page 
+  res.redirect(req.get('referer'));
 }
+
