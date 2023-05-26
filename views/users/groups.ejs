@@ -20,11 +20,24 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                        
+                            <form class="form-group" id="savegroup" action="/creategroup" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="userid" value="<%= user._id %>">
+                                <label for="" class="mt-2">Group name</label>
+                                <input class="form-control" name="groupname" type="text">
+
+                                <label for="" class="mt-2">Privacy</label>
+                                <select class="form-control" name="groupprivacy">
+                                    <option value="public">Public</option>
+                                    <option value="private">Private</option>
+                                </select>
+
+                                <label for="" class="mt-2">Picture</label>
+                                <input class="form-control" name="groupimage" type="file">
+                            </form>
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-dark btn-sm" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-dark btn-sm">Save changes</button>
+                        <button type="submit" form="savegroup" class="btn btn-dark btn-sm">Save changes</button>
                         </div>
                     </div>
                     </div>
