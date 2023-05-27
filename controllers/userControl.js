@@ -127,14 +127,13 @@ exports.login = async (req, res) => {
           res.cookie('jwt', token, { httpOnly: true, maxAge: expiry * 1000 });
           res.redirect('/home');
         } else {
-            res.redirect('/?message=InvalidCredentials');
+            res.render('users/registration', { message: 'InvalidCredentials' });
         }
       } else {
-        res.redirect('/?message=UserNotFound');
+        res.render('users/registration', { message: 'UserNotFound' });
       }
     } catch (error) {
-      console.log('Err on login', error);
-      res.redirect('/?message=ServerError');
+        res.render('users/registration', { message: 'ServerError' });
     }
   };
   

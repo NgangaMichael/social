@@ -4,17 +4,19 @@ const Group = require('../models/groupmodel');
 
 exports.creategroup = async (req, res) => {
     try {
-        const {groupname, groupprivacy, userid} = req.body;
-        const savegroup = new Post({
+        const {groupname, groupprivacy, slogan, userid} = req.body;
+        const savegroup = new Group({
             groupname: groupname,
             groupprivacy: groupprivacy,
+            slogan: slogan,
             groupimage: req.file.filename,
         })
+        // console.log(savegroup)
         await savegroup.save();
     
         // finding id and pushing to array of user id in groups model
         const user = await User.findById(userid);
-        savegroup.users.push(user._id);
+        savegroup.creator.push(user._id);
         await savegroup.save();
 
         res.redirect('/groups');

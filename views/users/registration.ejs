@@ -44,28 +44,22 @@
 
     <section class="container">
       <div class="col-md-12 text-center">
-
-        <% if (typeof message !== 'undefined') { %>
-          <div class="message">
-            <% if (message === 'InvalidCredentials') { %>
-              <p>Invalid credentials. Please try again.</p>
-            <% } else if (message === 'UserNotFound') { %>
-              <p>User not found.</p>
-            <% } else if (message === 'ServerError') { %>
-              <p>An error occurred. Please try again later.</p>
-            <% } %>
-          </div>
-        <% } %>
-
         <button class="mt-5 btn btn-dark btn-sm"><strong><i class="fa-solid fa-group-arrows-rotate fa-2x"></i> SOCIAL</strong></button>
       </div>
-      
-
     <div class="container logincontainer mt-2" style="
       padding-top: 1rem;
       padding-bottom: 1rem;
       box-shadow: 0px 1px 3px rgba(37, 37, 37, 0.3);
     ">
+    <% if (typeof message !== 'undefined') { %>
+      <% if (message === 'InvalidCredentials') { %>
+        <p class="text-danger"><strong>Invalid credentials</strong></p>
+      <% } else if (message === 'UserNotFound') { %>
+          <p class="text-danger"><strong>User not found!! Register now</strong></p>
+      <% } else if (message === 'ServerError') { %>
+        <p class="text-danger"><strong>Server error. Try again later.</strong></p>
+      <% } %>
+    <% } %>
       <form class="form-group mt-2" action="/login" method="POST">
         <input class="form-control mt-2" required name="email" placeholder="email" type="email">
         <input class="form-control mt-2" required name="password" placeholder="password" type="password">
@@ -81,8 +75,11 @@
           </h2>
           <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
             <form class="form-group mt-2" action="/adduser" method="POST" enctype="multipart/form-data">
-                <input class="form-control mt-2" required name="name" placeholder="name" type="name">
-                <input class="form-control mt-2" required name="email" placeholder="email" type="email">
+                <label class="mt-2" for="">Username</label>
+                <input class="form-control mt-2" required name="name" placeholder="John Doe" type="name">
+                
+                <label class="mt-2" for="">Email</label>
+                <input class="form-control mt-2" required name="email" placeholder="example@gmail.com" type="email">
                 <div class="row">
                   <div class="col-md-6">
                     <input class="form-control mt-2" min="15" required name="age" placeholder="age" type="number">
@@ -94,8 +91,49 @@
                     </select>
                   </div>
                 </div>
-                <input class="form-control mt-2" required name="country" placeholder="country" type="text">
+                <!-- <input class="form-control mt-2" required name="country" placeholder="country" type="text"> -->
+                <label class="mt-2" for="">Country</label>
+                  <select class="form-control mt-2" name="country" id="countrySelect">
+                      
+                    </select>
+                    <script>
+                      const countries = [
+                      'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria',
+                      'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan',
+                      'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cambodia',
+                      'Cameroon', 'Canada', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Comoros', 'Congo', 'Costa Rica',
+                      'Croatia', 'Cuba', 'Cyprus', 'Czechia', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'East Timor', 'Ecuador',
+                      'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini', 'Ethiopia', 'Fiji', 'Finland', 'France',
+                      'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau',
+                      'Guyana', 'Haiti', 'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland',
+                      'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Korea, North', 'Korea, South',
+                      'Kosovo', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein',
+                      'Lithuania', 'Luxembourg', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Mauritania',
+                      'Mauritius', 'Mexico', 'Micronesia', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia',
+                      'Nauru', 'Nepal', 'Netherlands', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Macedonia', 'Norway', 'Oman',
+                      'Pakistan', 'Palau', 'Palestinian Territories', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal',
+                      'Qatar', 'Romania', 'Russia', 'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino',
+                      'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands',
+                      'Somalia', 'South Africa', 'South Sudan', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria',
+                      'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Togo', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan',
+                      'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City',
+                      'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe'
+                      ];                                  
+                      const countrySelect = document.getElementById('countrySelect');
+                    
+                      countries.forEach(country => {
+                        const option = document.createElement('option');
+                        option.value = country;
+                        option.textContent = country;
+                        countrySelect.appendChild(option);
+                      });
+                    </script>
+                
+                
+                <label class="mt-2" for="">Password</label>
                 <input class="form-control mt-2" required name="password" placeholder="password" type="password">
+                
+                <label class="mt-2" for="">Profile Picture</label>
                 <input class="form-control mt-2" required name="image" type="file">
                 <button class="btn btn-dark w-100 btn-sm mt-2">Register</button>
             </form>
@@ -105,8 +143,8 @@
     </div>
     
     <div class="d-flex flex justify-content-center ">
-      <a class="mx-2 mt-2" href="/terms" style="color: grey; font-size: 0.7rem;">Terms</a>
-      <a class="mx-2 mt-2" href="/policy" style="color: grey; font-size: 0.7rem;">Privacy policy</a>
+      <a class="mx-2 my-2" href="/terms" style="color: grey; font-size: 0.7rem;">Terms</a>
+      <a class="mx-2 my-2" href="/policy" style="color: grey; font-size: 0.7rem;">Privacy policy</a>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->

@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 const groupSchema = mongoose.Schema({
     groupname: String,
     groupprivacy: String,
+    slogan: String,
     groupimage: String,
-    users: [{
+    creator: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }],
