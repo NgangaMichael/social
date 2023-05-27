@@ -24,6 +24,7 @@ router.get('/messages', userCTRL.messages);
 router.get('/groups', userCTRL.groups);
 router.get('/network', userCTRL.network);
 router.get('/policy', userCTRL.policy);
+router.get('/terms', userCTRL.terms);
 router.post('/adduser', upload, userCTRL.adduser);
 router.post('/login', userCTRL.login);
 router.post('/logout', userCTRL.logout);

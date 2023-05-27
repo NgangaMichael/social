@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const {checkUser} = require('./middleware/auth');
 const userRoute = require('./routes/userRoute');
 const postRoute = require('./routes/postsRoute');
+const groupRoute = require('./routes/groupsRoute');
 const dbsetup = require('./database/dbsetup');
 dbsetup();
 
@@ -18,8 +19,8 @@ app.use(express.urlencoded({extended: true}));
 app.use('*', checkUser);
 app.use(userRoute);
 app.use(postRoute);
+app.use(groupRoute);
 app.use(express.json());
-
 
 app.listen(3000, () => {
     console.log('Server has started')

@@ -40,14 +40,26 @@
       }
     }
   </style>
-  
   <body>
 
     <section class="container">
+      <div class="col-md-12 text-center">
 
-    <div class="col-md-12 text-center">
-        <button class="mt-5 btn btn-dark btn-sm"><strong> <i class="fa-solid fa-group-arrows-rotate fa-2x"></i> SOCIAL</strong></button>
-    </div>
+        <% if (typeof message !== 'undefined') { %>
+          <div class="message">
+            <% if (message === 'InvalidCredentials') { %>
+              <p>Invalid credentials. Please try again.</p>
+            <% } else if (message === 'UserNotFound') { %>
+              <p>User not found.</p>
+            <% } else if (message === 'ServerError') { %>
+              <p>An error occurred. Please try again later.</p>
+            <% } %>
+          </div>
+        <% } %>
+
+        <button class="mt-5 btn btn-dark btn-sm"><strong><i class="fa-solid fa-group-arrows-rotate fa-2x"></i> SOCIAL</strong></button>
+      </div>
+      
 
     <div class="container logincontainer mt-2" style="
       padding-top: 1rem;
@@ -91,7 +103,11 @@
         </div>
       </div>
     </div>
-    <a class="d-flex justify-content-center my-2" href="/policy" style="color: grey; font-size: 0.8rem;">Privacy policy</a>
+    
+    <div class="d-flex flex justify-content-center ">
+      <a class="mx-2 mt-2" href="/terms" style="color: grey; font-size: 0.7rem;">Terms</a>
+      <a class="mx-2 mt-2" href="/policy" style="color: grey; font-size: 0.7rem;">Privacy policy</a>
+    </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

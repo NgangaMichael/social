@@ -118,24 +118,26 @@ exports.adduser = async (req, res) => {
 
 exports.login = async (req, res) => {
     try {
-        const {email, password} = req.body;
-        const userEmail = await User.findOne({email});
-        if(userEmail) {
-            const validation = await bcrypt.compare(password, userEmail.password,);
-            if(validation) {
-                const token = createToken(userEmail._id);
-                res.cookie('jwt', token, {httpOnly: true, maxAge: expiry * 1000});
-                res.redirect('/home')
-            } else {
-                res.redirect('/')
-            }
+      const { email, password } = req.body;
+      const userEmail = await User.findOne({ email });
+      if (userEmail) {
+        const validation = await bcrypt.compare(password, userEmail.password);
+        if (validation) {
+          const token = createToken(userEmail._id);
+          res.cookie('jwt', token, { httpOnly: true, maxAge: expiry * 1000 });
+          res.redirect('/home');
         } else {
-            res.redirect('/');
+            res.redirect('/?message=InvalidCredentials');
         }
+      } else {
+        res.redirect('/?message=UserNotFound');
+      }
     } catch (error) {
-        console.log('Err on login', error);
+      console.log('Err on login', error);
+      res.redirect('/?message=ServerError');
     }
-}
+  };
+  
 
 exports.logout = async (req, res) => {
     try {
@@ -147,7 +149,15 @@ exports.logout = async (req, res) => {
 }
 exports.policy = (req, res) => {
     try {
-        res.render('users/policy')
+        res.render('policies/policy')
+    } catch (error) {
+        console.log('Err on home route')
+    }
+};
+
+exports.terms = (req, res) => {
+    try {
+        res.render('policies/terms')
     } catch (error) {
         console.log('Err on home route')
     }

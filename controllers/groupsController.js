@@ -11,9 +11,10 @@ exports.creategroup = async (req, res) => {
             groupimage: req.file.filename,
         })
         await savegroup.save();
+    
         // finding id and pushing to array of user id in groups model
         const user = await User.findById(userid);
-        savepost.users.push(user._id);
+        savegroup.users.push(user._id);
         await savegroup.save();
 
         res.redirect('/groups');
