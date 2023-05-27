@@ -48,7 +48,19 @@
                 <hr>
                 <h6>Groups you've joined</h6>
                 <!-- list of groups joined  -->
-
+                    <% if(groups.length > 0){ %>
+                        <% for(group of groups) { %>
+                            <div class="d-flex mt-2" style="border: 1px solid rgba(193, 193, 193, 0.8); border-radius: 2rem; ">
+                                <img class="img-fluid statusProfile" src="/groupimages/<%= group.groupimage %>" alt="">
+                                <div style="margin-left: 0.5rem;">
+                                    <%= group.groupname %> <br>
+                                    <%= group.slogan %>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% } else { %>
+                        <p>You have zro groups</p>
+                    <% } %>
                 <hr>
                 <h6>Other groups</h6>
 

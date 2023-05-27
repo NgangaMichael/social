@@ -5,6 +5,7 @@ const expiry = 60 * 60 * 1;
 const secret = 'mancity';
 const Post = require('../models/postsmodel');
 const Comment = require('../models/comments');
+const Group = require('../models/groupmodel');
 
 const createToken = ({_id}) => {
     return jwt.sign({_id}, secret, {expiresIn: expiry * 1000})
@@ -79,9 +80,10 @@ exports.messages = (req, res) => {
     }
 };
 
-exports.groups = (req, res) => {
+exports.groups = async (req, res) => {
     try {
-        res.render('users/groups')
+        const groups = await Group.find({})
+        res.render('users/groups', {groups})
     } catch (error) {
         console.log('Err on home route')
     }
