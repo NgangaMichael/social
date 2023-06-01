@@ -50,7 +50,8 @@
                 <!-- list of groups joined  -->
                     <% if(groups.length > 0){ %>
                         <% for(group of groups) { %>
-                            <div class="d-flex mt-2" style="border: 1px solid rgba(193, 193, 193, 0.8); border-radius: 2rem; ">
+                            <!-- <div class="d-flex mt-2" style="border-radius: 2rem; box-shadow: 2px 2px 3px rgba(0,0,0,0.2); "> -->
+                            <div id="group-<%= group.groupId %>" class="d-flex mt-2" style="border-radius: 2rem; box-shadow: 2px 2px 3px rgba(0,0,0,0.2);">
                                 <img class="img-fluid statusProfile" src="/groupimages/<%= group.groupimage %>" alt="">
                                 <div style="margin-left: 0.5rem;">
                                     <%= group.groupname %> <br>
@@ -70,11 +71,33 @@
         <!-- second row  -->
         <div class="col-md-8">
             <div class="container containerborder" style="font-size: 0.9rem;">
-                
+                <div id="content-container">
+
+                </div>
             </div>
         </div>
 
     </div>
 </div>
+
+<script>
+    // Get all group divs
+    const groupDivs = document.querySelectorAll("[id^='group-']");
+
+    // Attach event listener to each group div
+    groupDivs.forEach((groupDiv) => {
+        groupDiv.addEventListener('click', function() {
+            const groupId = groupDiv.id.split('-')[1]; // Extract the group ID from the div's ID
+
+            // Make an API call or retrieve the group's content using the groupId
+
+            // Example: Replace the content in the content container with the group's content
+            const contentContainer = document.getElementById('content-container');
+            contentContainer.innerHTML = `<h2>${groupId}'s Content</h2>`;
+        });
+    });
+</script>
+
+
 
 <%- include('../templates/footer.ejs') %>
